@@ -15,15 +15,13 @@ public class UIControl : MonoBehaviour {
 	{
 		playerScript = player.GetComponent<playerController>();
 		castPointScript = eventSystem.GetComponent<castPointController>();
-		Resolution[] resolutions = Screen.resolutions;
-		Debug.Log(resolutions[1].height.ToString());
 	}
 
 
 	void Update ()
 	{
-		debugText1.text = castPointScript.getMouseMovment().ToString();
-		debugText2.text = castPointScript.getScreenInUnits().x.ToString("G4");
+		debugText1.text = "Mouse Movement: " + castPointScript.getMouseMovement().ToString("G4");
+		debugText2.text = "Object Position: " + castPointScript.getCastPointPosition().ToString("G4");
 	}
 
 	

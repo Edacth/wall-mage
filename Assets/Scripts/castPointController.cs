@@ -12,7 +12,6 @@ public class castPointController : MonoBehaviour {
 	private Vector2 mousePosition;
 	private Vector2 previousMousePositon;
 	private Vector2 mouseMovement;
-	Resolution[] resolutions;
 	float screenHeightInUnits;
 	float screenWidthInUnits;
 	float unitPerPixel;
@@ -24,14 +23,16 @@ public class castPointController : MonoBehaviour {
 		castPoint.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3, player.transform.position.z);
 		mousePosition = Input.mousePosition;
 		previousMousePositon = Input.mousePosition;
-		resolutions = Screen.resolutions;
 		screenHeightInUnits = camera.orthographicSize * 2;
 		screenWidthInUnits = screenHeightInUnits * ((float)Screen.width / (float)Screen.height);
 		unitPerPixel = screenHeightInUnits / Screen.height;
-		Debug.Log(unitPerPixel.ToString("G4"));
-	}
+		Debug.Log(Input.mousePosition.ToString("G4"));
+		Debug.Log((Input.mousePosition * unitPerPixel).ToString("G4"));
+        Cursor.lockState = CursorLockMode.Locked;
 
-	void Update()
+    }
+
+    void Update()
 	{
 		/*Shit Trig System*/
 		{/*
@@ -50,23 +51,30 @@ public class castPointController : MonoBehaviour {
 		*/
 		}
 
-		/*Cool Ortho System*/
+        /*Cool Ortho System*/
+        {/*
 		mousePosition = Input.mousePosition;
-		mouseMovement = (mousePosition - previousMousePositon);
-		mouseMovement.x *= unitPerPixel;
-		mouseMovement.y *= unitPerPixel;
-		previousMousePositon = mousePosition;
+        mouseMovement = (mousePosition - previousMousePositon);
+        mouseMovement.x *= unitPerPixel;
+        mouseMovement.y *= unitPerPixel;
+        previousMousePositon = mousePosition;
+        castPoint.transform.position = new Vector3(castPoint.transform.position.x + mouseMovement.x, castPoint.transform.position.y + mouseMovement.y, 0);
+        */}
 
+        mouseMovement = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        
+        mouseMovement.x *= 0.4f;
+        mouseMovement.y *= 0.4f;
 		castPoint.transform.position = new Vector3(castPoint.transform.position.x + mouseMovement.x, castPoint.transform.position.y + mouseMovement.y, 0);
+    }
+
+	public Vector2 getCastPointPosition()
+	{
+		return castPoint.transform.position;
 	}
 
-	public Vector2 getMouseMovment()
+	public Vector2 getMouseMovement()
 	{
 		return mouseMovement;
-	}
-
-	public Vector2 getScreenInUnits()
-	{
-		return new Vector2(screenWidthInUnits, screenHeightInUnits);
 	}
 }

@@ -9,19 +9,19 @@ public class UIControl : MonoBehaviour {
 	public Text debugText2;
 	public GameObject player;
 	public GameObject eventSystem;
-	private playerController playerScript;
+	private physicsObject playerScript;
 	private castPointController castPointScript;
 	void Start ()
 	{
-		playerScript = player.GetComponent<playerController>();
+		playerScript = player.GetComponent<physicsObject>();
 		castPointScript = eventSystem.GetComponent<castPointController>();
 	}
 
 
 	void Update ()
 	{
-		debugText1.text = "Mouse Movement: " + castPointScript.getMouseMovement().ToString("G4");
-		debugText2.text = "Object Position: " + castPointScript.getCastPointPosition().ToString("G4");
+		//debugText1.text = "Move Direction: " + playerScript.getDebugData().ToString("G4");
+		//debugText2.text = playerScript.getDebugData2().ToString();
 	}
 
 	

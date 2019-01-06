@@ -26,8 +26,6 @@ public class castPointController : MonoBehaviour {
 		screenHeightInUnits = camera.orthographicSize * 2;
 		screenWidthInUnits = screenHeightInUnits * ((float)Screen.width / (float)Screen.height);
 		unitPerPixel = screenHeightInUnits / Screen.height;
-		Debug.Log(Input.mousePosition.ToString("G4"));
-		Debug.Log((Input.mousePosition * unitPerPixel).ToString("G4"));
         Cursor.lockState = CursorLockMode.Locked;
 
     }

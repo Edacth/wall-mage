@@ -3,55 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class playerController : MonoBehaviour
+public class playerController : physicsObject
 {
 	public float speed = 6.0f;
 	public float jumpSpeed = 6.0f;
-	public float gravity = 30.0f;
-	public float fallMultiplier = 2.0f;
 
-	private CharacterController controller;
-	private Vector3 moveDirection = Vector3.zero;
+	private SpriteRenderer spriteRenderer;
 
-	void Start ()
+	void Awake ()
 	{
-		controller = GetComponent<CharacterController>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
-	
-	void Update ()
+
+	protected override void ComputeVelocity()
 	{
-        
-		moveDirection.x = Input.GetAxis("Horizontal"); //Get horizontal input
-		moveDirection.x *= speed; //Multiply movement by speed
+		Vector2 move = Vector2.zero;
 
+		move.x = Input.GetAxis("Horizontal");
 
-		if (controller.isGrounded) //If grounded
+		if (Input.GetButtonDown("Jump") && grounded)
 		{
-			moveDirection.y = 0.0f; //Set y movement to 0.0
-			if (Input.GetButton("Jump")) //Get jump input
+			velocity.y = jumpSpeed;
+		}
+		else if (Input.GetButtonUp("Jump"))
+		{
+			if (velocity.y > 0)
 			{
-				moveDirection.y = jumpSpeed; //Add jump velocity
+				velocity.y = velocity.y * 0.5f;
 			}
 		}
 
-
-		
-		if (moveDirection.y < 0) //If falling
-		{
-			moveDirection.y += (gravity * fallMultiplier * Time.deltaTime); //Apply gravity
-		}
-		else
-		{
-			moveDirection.y += (gravity * Time.deltaTime); //Apply gravity
-		}
-
-		controller.Move(moveDirection * Time.deltaTime); //Move the character
-        
+		targetVelocity = move * speed;
 	}
 
-	public Vector3 getMoveDirection()
+	/*public Vector3 getDebugData()
 	{
 		return moveDirection;
 	}
+
+	public bool getDebugData2()
+	{
+		return isGrounded();
+	}*/
+
 }
 

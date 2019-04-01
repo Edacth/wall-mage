@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4381296524299534}
-  - component: {fileID: 114156380459377592}
   - component: {fileID: 212582236534304022}
   - component: {fileID: 61312145381698004}
+  - component: {fileID: 114156380459377592}
   m_Layer: 9
   m_Name: CastPoint
   m_TagString: Untagged
@@ -51,14 +51,14 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   player: {fileID: 1370924661097454, guid: a5d6fbc5867bf934ea13ccbe7e8857ac, type: 2}
   castPoint: {fileID: 1540242062269034}
   camera: {fileID: 0}
+  sensitivity: 0.4
 --- !u!212 &212582236534304022
 SpriteRenderer:
   m_ObjectHideFlags: 1
